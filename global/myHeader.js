@@ -7,7 +7,7 @@ class Header extends HTMLElement{
         this.innerHTML = `
         <header id="header" class="flex-head">
             <div id="pic" class="me-small">
-                <a href="./"><img src='global/me.jpg' 
+                <a href="./"><img src='global/Irradiated_Square.png' 
                         style='width: 175px; border: 5px solid black'></a>
             </div>
             <div class="flex-vert">
