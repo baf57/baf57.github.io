@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en_US">
+    <head>
+        <meta charset="utf-8">
+        <title>Brayden Freitas</title>
+        <meta name="author" content="Brayden Freitas">
+        <meta name="description" content="The home site of Brayden Freitas: 
+            physicist, programmer, mathmetician, designer.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="https://www.brayden.xyz">
+        <!-- <base href="/home/brayden/Programs/website/root/"> -->
+        <link rel="icon" href="tempico.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="global/myStyles.css">
+        <script src="global/jquery-3.5.0.min.js"></script>
+        <script src="global/contChecks.js"></script>
+        <script src="global/oneTimes.js"></script>
+        <script src="global/myHeader.js"></script>
+        <script src="global/myNav.js"></script>
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+            MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+            };
+        </script>
+    </head>
+    <body class="light-gray">
+        <my-header></my-header>
+        <div style='width: 100%'>
+            <main id="main" class="main">
+                <div id="title" class="w3-container liver lockable" style="transition: 0.4s; width: 0px; white-space: nowrap;">
+                    <span style="float: left"><h2>1D Self Consistent Quantum Poisson Problem Solver Documentation</h2></span>
+                    <span id="totop" style="float: right; margin-top: 10px; display: none">
+                        <a href="projects/1d_readme.html#header">[to top &#11205]</a></span>
+                </div>
+                <div id="content" class="w3-container sienna" style="transition: 0.4s; width: 0px">
+                    <div class="w3-card-4 w3-container light-gray content-item">
+                        <h3>
+                            This requires MathJax to render (and thus JavaScript as well). 
+                            Presumably this should just show the LaTeX commands with poor 
+                            formatting if either of those tools fail. MathJax renders math 
+                            above other things in the document, and I cannot find a solution 
+                            to this issue.
+                        </h3>
+                        <h3>The original Markdown file can be downloaded <a href="projects/README.md">here</a>.</h3>
+                    </div>
+                    <div class="w3-card-4 w3-container light-gray content-item">
+<h2 id="overview">Overview</h2>
+<p>Brayden Freitas &mdash; CEA Grenoble &mdash; University of Pittsburgh</p>
+<h3 id="elevator-pitch">Elevator Pitch</h3>
+<p>A python pack to solve the self-consistent quantum-poisson problem for applications in quantum-mechanically dictated systems within condensed matter semiconductor setups.</p>
+<h3 id="summary">Summary</h3>
+<p>This solver provides an open source and lightweight algorithm to solve the aforementioned problem. First, on a region of interest (referd to as the set $Q$) the Poisson-derived local charge density as a function of potential equation (refered to as “LLP(<span class="math inline">$\mu$</span>,z)”) is found via the Poisson solver. Next the quantum-mechanically-derived local charge density as a function of potential equation (refered to as “ILDOS(<span class="math inline">$\mu$</span>,z)”) is found via the quantum mechanics solver. Lastly, since LLP(<span class="math inline">$\mu$</span>,z) is a decreasing or constant function, and ILDOS(<span class="math inline">$\mu$</span>,z) is a strictly increasing function, the intersection point between the two functions can always be found, and thus the solution to the problem will always converge.</p>
+                    </div>
+                    <div class="w3-card-4 w3-container light-gray content-item">
+<h2 id="poisson-solver">Poisson Solver</h2>
+<h3 id="solving-for-the-charge-density-and-potential">Solving for the Charge Density and Potential</h3>
+<p>By Gauss’s Law (applied in one dimension via the 1D Stoke’s Theorem)</p>
+$$E(z_{i+1})-E(z_i)=\frac{q_i}{\epsilon_r\epsilon_0}, \qquad(1)$$
+<p>where <span class="math inline">$E(z_i)$</span> is the electric field at position <span class="math inline">$z_i$</span>, <span class="math inline">$q_i$</span> is the charge over the interval <span class="math inline">$[i,i+1)$</span>, <span class="math inline">$\epsilon_r$</span> is the relative permitivitty of the material, and <span class="math inline">$\epsilon_0$</span> is the vacuum permitivitty. From Poisson’s Equation, it is known that <span class="math inline">$E(z)=-\frac{\partial V}{\partial z},$</span> which can be discretized in one dimension as <span class="math inline">$\frac{\partial V}{\partial z}\approx\frac{2(V_{i-1}-V_i)}{z_{i+1}-z_{i-1}}.$</span> Thus,</p>
+$$E(z_i)\approx\frac{2(V_{i-1}-V_i)}{z_{i+1}-z_{i-1}}, \qquad (2)$$
+<p>where <span class="math inline">$V_i$</span> is the potential at the position <span class="math inline">$\frac{1}{2}(z_i+z_{i+1})$</span>.</p>
+<p>Subsituting <span class="math inline">$(2)$</span> into <span class="math inline">$(1)$</span> yields</p>
+$$V_{i-1} (\frac{-2}{z_{i+1}-z_{i-1}}) + 
+V_i(\frac{2(z_{i+2}+z_{i+1}-z_i-z_{i-1})}{(z_{i+1}-z_{i-1})(z_{i+2}-z_i)}) + 
+V_{i+1} (\frac{-2}{z_{i+2}-z_i}) = \frac{q_i}{\epsilon_r\epsilon_0}, \qquad (3)$$
+<p>for any <span class="math inline">$i\in\mathbb{N}[1,N-1]$</span> in a system with <span class="math inline">$N$</span> sites. Since the charge on each site is based on the potential on the site as well as the two sites around it, this system can be written as a linear system of the form</p>
+$$M\vec{V}=\vec{q}\qquad (4)\\
+s.t\ M_{i,i-1}=\frac{-2}{z_{i+1}-z_{i-1}},\ 
+M_{i,i}=\frac{2(z_{i+2}+z_{i+1}-z_i-z_{i-1})}{(z_{i+1}-z_{i-1})(z_{i+2}-z_i)},\ 
+M_{i,i+1}=\frac{-2}{z_{i+2}-z_i}\ \forall i\in\mathbb{N}[1,N-1],$$
+<p>where <span class="math inline">$M$</span> is a matrix of the form above, <span class="math inline">$\vec{V}$</span> is a vector containing each potential in the system, and <span class="math inline">$\vec{q}$</span> is a vector containing each charge in the system (the <span class="math inline">$\frac{1}{\epsilon_r\epsilon_0}$</span> factor is absorbed into <span class="math inline">$\vec{q}$</span>).</p>
+<p>Since the inputs to the solver can be a mixture of potentials and charge densities, it is efficient to restructure the problem so that it can be solved as a linear equation. To accomplish this, <span class="math inline">$(4)$</span> can be rewritten as</p>
+$$\begin{bmatrix}M_{NN} &amp; M_{ND} \\ M_{DN} &amp; M_{DD}\end{bmatrix}
+\begin{bmatrix}V_N\\V_D \end{bmatrix} = \begin{bmatrix}q_N\\q_D \end{bmatrix}\\
+\Rightarrow \begin{bmatrix}M_{NN}&amp;\mathbb{0}\\M_{DN}&amp;-\mathbb{1}\end{bmatrix}
+\begin{bmatrix}V_N\\q_D\end{bmatrix}=
+\begin{bmatrix}\mathbb{1}&amp;-M_{ND}\\\mathbb{0}&amp;-M_{DD}\end{bmatrix}
+\begin{bmatrix}q_N\\V_D\end{bmatrix}. \qquad (5)$$
+<p>The subscripts <span class="math inline">$_D$</span> and <span class="math inline">$_N$</span> indicated that the values are either dirichilet conditions or nuemann conditions, repsectively. For example, a value which is subscripted as dirichilet is 0 unless the site that it is associated with was defined by the user as a dirichlet site, or in other words the user defined the potential for that site, rather than the charge density. Likewise, a value subscritpted with nuemann is 0 unless the site it is associated with was defined by the user as a nuemann site (charge density defined). From <span class="math inline">$(5)$</span>, the RHS of the equation is always a known vector, and thus this is a linear system which is solved using NumPy’s sparse linear algebra package, producing the output for the solver.</p>
+<h3 id="generating-the-local-poisson-lpp-equation">Generating the Local Poisson (LPP) Equation</h3>
+<p>The local Poisson equation derives from the discretized Poisson equation, and takes the form</p>
+$$n_i= \epsilon_i \delta U + n_i^s,\qquad (6)$$
+<p>where <span class="math inline">$\epsilon_i$</span> is a local capacitance term, and <span class="math inline">$n_i^s$</span> is a source term. From <span class="math inline">$q_D$</span> found in <span class="math inline">$(5)$</span>, the source term can be calculated as</p>
+$$n_i^s = \frac{q_D}{z_{i+1}-z_i}.\qquad (7)$$
+<p>The local capacitance term is</p>
+$$\epsilon_i = \begin{cases} C_i, &amp; C_i \neq 0 \\ C_{ii}, &amp; \text{else}\end{cases}
+\qquad (8)$$
+<p>where <span class="math inline">$C_i$</span> is the edge local capacitance term, and <span class="math inline">$C_{ii}$</span> is the bulk local capacitance term. The edge term is found via setting all sites in <span class="math inline">$Q$</span> as dirichlet sites with <span class="math inline">$V=1$</span>, all sites which are originally dirichlet sites to their initial values, and all other sites to have <span class="math inline">$V=0$</span>. This only produces non-zero values on sites of interest which are on the borders of <span class="math inline">$Q$</span>, and so the bulk local capacitance term must be used on those sites instead. The bulk term is found via the same method as above, however instead of setting all sites in <span class="math inline">$Q$</span> to have <span class="math inline">$V=1$</span> at the same time, each site is instead individually set to <span class="math inline">$V=1$</span> while every other site in <span class="math inline">$Q$</span> besides that one is set to <span class="math inline">$V=0$</span>.</p>
+<p>Lastly, equations <span class="math inline">$(7)$</span> and <span class="math inline">$(8)$</span> are substituted into <span class="math inline">$(6)$</span>, and the LPP is fully defined.</p>
+                    </div>
+                    <div class="w3-card-4 w3-container light-gray content-item">
+<h2 id="quantum-mechanics-solver">Quantum Mechanics Solver</h2>
+<h3 id="the-quantum-system">The Quantum System</h3>
+<p>After the classical system is constrcuted, a quantum region of that system can be defined. Typically, the quantum system will have a much smaller discretization, on the order of at least 100 times smaller than that of the classical system. Either the potential or the charge density must be defined over the entire quantum system at construction. Unlike the classical system, the entirety of the quantum system must have the same discretization throughout since it is solved using the tight bining model.</p>
+<h3 id="solving-for-the-energy-and-wavefunctions">Solving for the Energy and Wavefunctions</h3>
+<p>Using the tight binding model, the time independent Schrodinger wave equation is discretized and rewritten in 1D as follows:</p>
+$$(\frac{-\hbar^2}{2m}\nabla^2 + V)\Psi=E\Psi\\
+\rightarrow\frac{-\hbar^2}{2ma^2}(\Psi_{i-1}+(\frac{V}{t}-2)\Psi_i+\Psi_{i+1})=
+(E_i+\frac{\hbar^2}{2m}(k_x^2+k_y^2))\Psi_i.
+\qquad (7)$$
+<p>Substituting <span class="math inline">$t=\frac{\hbar^2}{2ma^2}$</span> and <span class="math inline">$\bar{E}=E+\frac{\hbar^2}{2m} (k_x^2+k_y^2)$</span> into <span class="math inline">$(7)$</span> allows us to rewrite it as follows:</p>
+$$H\Psi=\bar{E}\Psi\qquad (8)\\s.t.\ 
+H_{i,i-1}=-t,\ H_{i,i}=V+2t,\ H_{i,i+1}=-t.$$
+<p>This is just a problem of diagonalizing the Hamiltonian, which is again done using NumPy’s sparse linear algebra package, producing the solved energy and wavefunction.</p>
+<h3 id="generating-the-integrated-local-density-of-states-ildos-equation">Generating the Integrated Local Density of States (ILDOS) Equation</h3>
+<p>The density of electrons within the quantum region is calculated by filling all of the possible states that an electron could occupy up to some energy level, and multiplying this by the liklihood that an electron would be at a certain position. Mathematically, this is described as</p>
+$$n(\mu,z)=|\Psi_z(z)|^2\int\rho(\mu)f(\mu)\ d\mu$$
+<p>where f is the fermi function (unit step function with <span class="math inline">$E_f=0$</span> since it is constrained that <span class="math inline">$T=0$</span>) and <span class="math inline">$\rho(\bar{E})$</span> is the density of states function. We then have our ILDOS as</p>
+$$n_i = |\Psi_z(z_i)|^2\int\Theta(\rho(\mu))\ d\mu\qquad(9)$$
+<p>where <span class="math inline">$\Theta(x)$</span> is the Heaviside function. To derive <span class="math inline">$\rho(\bar{E})$</span>, the problem must be considered a 3-Dimensional problem with one confined dimension and two unconfined dimensions. To approximate this in the seperable dimension case (i.e. no magnetic field), the dimension which the system was being varied along up until this point is definedas the <span class="math inline">$z$</span>-dimension, making the thickness of that dimension <span class="math inline">$L_z=$</span> the thickness of the quantum region. The<span class="math inline">$x$</span>- and <span class="math inline">$y$</span>- dimensions are assumed to have thicknesses <span class="math inline">$L_x,L_y&gt;&gt;L_z$</span>, as well as periodic boundary conditions, and thus the wavefunctions along those axes can be expressed as</p>
+$$\Psi_x(x)=e^{ik_xx},\ \Psi_y(y)=e^{ik_yy}$$
+<p>where</p>
+$$k_x=n_x\frac{2\pi}{L_x},\ k_y=n_y\frac{2\pi}{L_y}\ |\ n_x,n_y\in\mathbb{Z}.$$
+<p>Each allowed value of the k-space occupies an area of <span class="math inline">$A=\left(\frac{2\pi}{L_x}\right)\times\left(\frac{2\pi}{L_y}\right)$</span>, and so the number of states in any given ring in the <span class="math inline">$x-y$</span> plane with thickness <span class="math inline">$dk$</span> is</p>
+$$n_s(\vec{k})\ d\vec{k}=\frac{A}{2\pi}\vec{k}\ d\vec{k}.\qquad(10)$$
+<p>From the definition of <span class="math inline">$\bar{E}$</span> we have that</p>
+$$\mu - \bar{E}=\frac{\hbar^2|\vec{k}|^2}{2m},\ \mu\geq \bar{E},$$
+<p>where <span class="math inline">$\mu$</span> is the energy which all the states will be below. From this and <span class="math inline">$(10)$</span>, after substituting real units out and <span class="math inline">$t$</span> units in, we have</p>
+$$\rho(\mu)=\frac{1}{2ta^2\pi}\sum_n(\mu - \bar{E}_n)\qquad(11)$$
+<p>where <span class="math inline">$a$</span> is the spacing between any two sites in the <span class="math inline">$z$</span>-direction. Substituting this density of states equation <span class="math inline">$(11)$</span> with equation <span class="math inline">$(9)$</span> provides the ILDOS equation for 2 dimensions,</p>
+$$n(\mu,z) = \frac{|\Psi_z(z)|^2}{2ta^2\pi}\int_{\mu}\sum_n\Theta(\mu - \bar{E}_n)\ d\mu.$$
+<p>When divided by <span class="math inline">$a$</span> this equation becomes the ILDOS equation in 3 dimensions which is desired, and can be discretized as</p>
+$$n_i(\mu_j) = \frac{|\Psi_z(z_i)|^2}{2ta^3\pi}\sum_j\sum_n(\mu_j-\bar{E}_n),
+\ \forall\ \mu_j\geq\bar{E}_n.\qquad(12)$$
+                    </div>
+                    <div class="w3-card-4 w3-container light-gray content-item">
+<h2 id="self-consistent-solver">Self-Consistent Solver</h2>
+<h3 id="intersection-point">Intersection Point</h3>
+<p>The global classical mechanics from the Poisson solver show that there are energy levels in this system on the scale of whole <span class="math inline">$\text{eV}$</span>, while the local quantum mechanics from the ILDOS derivation show that there are energy levels in this system on the scale of <span class="math inline">$\text{meV}$</span>. In a system like a 2-dimensional electron gas (2DEG) the <span class="math inline">$\text{meV}$</span> energy scale is of more interest than the <span class="math inline">$\text{eV}$</span> energy scale, however the <span class="math inline">$\text{eV}$</span> scale has large effects on the <span class="math inline">$\text{meV}$</span> scale, and so both types of mechanics must be solved in such a way that they change one another until convergence. To accomplish this, the LPP and ILDOS solutions are compared. Since the LPP is always a decreasing or constant function, and the ILDOS is always increasing, there will always be an intersection point which can be found between the two equations. That point gives the potential (<span class="math inline">$U_i$</span>) and charge density (<span class="math inline">$n_i$</span>) which satisfy both the classical and quantum mechanics.</p>
+<h3 id="convergence-steps">Convergence Steps</h3>
+<p>Once the intersection point is found, the global system must be adjusted to fit with this new system. In doing this, the LPP and ILDOS may adjust, which would create new intersection points, and the adjustments would begin again. To assure convergence, a three step method was derived.</p>
+<h4 id="step-i">Step <span class="math inline">$I$</span></h4>
+<p>The LPP is accurate within the electron gas since screening is occuring, however any sites in the electron gas which are depleted are not screening, and thus would render the LPP inaccurate. To account for this, any sites which have a charge density of <span class="math inline">$0$</span> (the set of which is called <span class="math inline">$Q'$</span>) are removed from <span class="math inline">$Q$</span>, and the new set <span class="math inline">$Q/Q'$</span> is the set which LPP solutions is found on. After the removal, the LPP is regenerated with only the capacitance terms recalculated. This is repeated unil <span class="math inline">$Q/Q'$</span> converges.</p>
+<h4 id="step-ii">Step <span class="math inline">$II$</span></h4>
+<p>To relax the Poisson problem in the remaining sites, the LPP is recalculated using <span class="math inline">$U_i$</span> as input. Since <span class="math inline">$Q/Q'$</span> is fixed from step <span class="math inline">$I$</span>, only the source term is replaced during the LPP recalculation. The intersection is again found, and this is repeated until convergence.</p>
+<h4 id="step-iii">Step <span class="math inline">$III$</span></h4>
+<p>To relax the Quantum problem, the ILDOS is recalculated on the sites <span class="math inline">$Q/Q'$</span>. The intersection points are again found, and this is repeated until convergence.</p>
+<h3 id="step-order">Step Order</h3>
+<p>The steps can be preformed in any order, however step <span class="math inline">$III$</span> is the most computationally demanding of the steps, and so is preformed last. Since step <span class="math inline">$I$</span> makes the system smaller, thus reducing the computational demand of any step which comes after it, it is best to preform this step first. Consiquentially, it is logical that step <span class="math inline">$II$</span> should come second. These steps are not preformed linearly however, and after each repetition of step <span class="math inline">$III$</span>, step <span class="math inline">$I$</span> is repeated from <span class="math inline">$Q$</span> to convergence, followed by step <span class="math inline">$II$</span>. While generally not needed, this assures that the system does not minimize to an incorrect <span class="math inline">$Q/Q'$</span>.</p>
+                    </div>
+                </div>
+            </main>
+            <my-nav page="projects"></my-nav>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en_US">
+    <head>
+        <meta charset="utf-8">
+        <title>Brayden Freitas</title>
+        <meta property="og:title" content="Brayden Freitas">
+        <meta name="author" content="Brayden Freitas">
+        <meta name="description" content="The home site of Brayden Freitas: physicist, programmer, mathmetician, designer.">
+        <meta property="og:description" content="The home site of Brayden Freitas: physicist, programmer, mathmetician, designer.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:image" content="https://www.brayden.xyz/global/me.jpg">
+        <meta property="og:url" content="https://www.brayden.xyz/">
+        <meta name="twitter:card" content="summary">
+        <base href="https://www.brayden.xyz">
+        <!-- <base href="/home/brayden/Programs/website/root/"> -->
+        <link rel="icon" href="tempico.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="global/myStyles.css">
+        <script src="global/jquery-3.5.0.min.js"></script>
+        <script src="global/contChecks.js"></script>
+        <script src="global/oneTimes.js"></script>
+        <script src="global/myHeader.js"></script>
+        <script src="global/myNav.js"></script>
+    </head>
+    <body class="light-gray">
+        <my-header></my-header>
+        <div style='width: 100%'>
+            <main id="main" class="main">
+                <div id="title" class="w3-container liver lockable" style="transition: 0.4s; width: 0px; white-space: nowrap;">
+                    <span style="float: left"><h2>Home</h2></span>
+                    <span id="totop" style="float: right; margin-top: 10px; display: none">
+                        <a href="#header">[to top &#11205]</a></span>
+                </div>
+                <div id="content" class="w3-container sienna" style="transition: 0.4s; width: 0px">
+                    <!-- <div class="w3-card-4 w3-container light-gray content-item">
+                        <h3>This Website</h3>
+                        <p>
+                            I created this website originally during the beginning of May, 2020. I did
+                            this with a few goals in mind:
+                            <ol>
+                                <li>Learning HTML</li>
+                                <li>Refreshing my skills in JavaScript and CSS</li>
+                                <li>Centralizing and/or hosting all my published projects</li>
+                                <li>Trying my hand at site design</li>
+                                <li>Boosting my personal r&eacute;sum&eacute;</li>
+                                <li>Leaning a new API</li>
+                            </ol>
+                            After this process I now have a functional understanding of 
+                            HTML, and could likely make a very wide array of different things using
+                            it. My proficiency in Java, as well as my recent exploration with C# was
+                            sufficient enough to assure that I had no issues with JavaScript at all.
+                            While most projects that I have published are hosted on GitHub, I still 
+                            find this to be a useful central hub where I can provide a better 
+                            presentation of the projects, as well as categorize in-progress projects.
+                            As for site design, I found it to be the most challenging part since I
+                            needed to balance what I thought would look good with what I could viably
+                            code. I originally set out to learn W3.CSS as a style guide for this site,
+                            but decided to diverge from it to have more freedom in my own design,
+                            although I did use some of its classes. I decided that from now on I will 
+                            keep an updated version of my r&eacute;sum&eacute; hosted on this site. 
+                        </p>
+                        <p>
+                            Speaking of my email, it is not included anywhere in plain text in an
+                            effort to assure that it cannot be easily scalped by any bots looking to
+                            expand their list of recipients for spam. As a result, any link to my email
+                            is not a direct link, but rather is triggered by a JavaScript function to 
+                            display the email. Further, any references to my email in other documents 
+                            is removed if it would be displayed in plaintext at the top level.
+                        </p>
+                    </div> -->
+                    <div class="w3-card-4 w3-container light-gray content-item">
+                        <h3>About Me</h3>
+                        <p>
+                            I am a physicist, mathematician, programmer and
+                            wood-worker pursuing a PhD in Physics at the
+                            University of Ottawa. I currently have bachelor's
+                            degrees from the University of Pittsburgh in both
+                            Physics and Mathematics and a minor in Computer
+                            Science, with a primary academic focus on
+                            computational physics and quantum mechanics.  My
+                            career interests reside in the areas of fundamental
+                            quantum physics, quantum measurement, and
+                            computational mathematics. 
+                        </p>
+                        <p>
+                            Computers have always been a hobby of mine and I am
+                            both self and formally taught in multiple
+                            programming languages as well as in a wide array of
+                            software. I use Linux (specifically <a
+                            href="https://www.debian.org/">Debian</a> testing)
+                            as my primary OS, which I also contribute to via bug
+                            reporting. I have also always had an interest in
+                            digital design and art, and have years of experience
+                            with 3D model design and 3D printing software
+                            and hardware. For leisure I enjoy cycling, hiking,
+                            mountaineering, and local music.
+                        </p>
+                        <p>
+                            My most active hobby is wood-working, which also
+                            doubles as a secondary form of income for me. Most
+                            of my work consists of furniture making, as well as
+                            print framing. Alongside the end products I make, I
+                            also make a wide range of jigs, tools, and general
+                            equipment to assist me in my work. I have many of my
+                            plans hosted on this site, as well as images of some
+                            of my completed projects.
+                        </p>
+                    </div>
+                    <div class="w3-card-4 w3-container light-gray content-item">
+                        <h3>Web-map</h3>
+                        <p>
+                            I have arranged this site into multiple different pages for better
+                            organization. Each section should be mostly self-described by its name, but
+                            I will include brief descriptions of each here just in case:
+                            <ul>
+                                <li>Home &mdash; here, the main portal of the site</li>
+                                <li>R&eacute;sum&eacute; &mdash; my personal resume, which can be both
+                                    viewed and downloaded from there</li>
+                                <li>Coding Projects &mdash; a hub for hosting or pointing to all of my 
+                                    projects</li>
+                                <li>Publications &mdash; descriptions and links to publications I have 
+                                    authored or co-authored.
+                                </li>
+                                <li>Digital Designs &mdash; a hub for hosting any designs I have done including
+                                    3D prints, digital art, wood-working, etc.</li>
+                                <li>Wood-Working &mdash; an area for me to post
+                                project plans I create and/or final photos
+                                of some projects.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </main>
+            <my-nav page="."></my-nav>
+        </div>
+    </body>
+</html>

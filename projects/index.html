@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en_US">
+    <head>
+        <meta charset="utf-8">
+        <title>Brayden Freitas</title>
+        <meta name="author" content="Brayden Freitas">
+        <meta name="description" content="The home site of Brayden Freitas: 
+            physicist, programmer, mathmetician, designer.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="https://www.brayden.xyz">
+        <!-- <base href="/home/brayden/Programs/website/root/"> -->
+        <link rel="icon" href="tempico.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="global/myStyles.css">
+        <script src="global/jquery-3.5.0.min.js"></script>
+        <script src="global/contChecks.js"></script>
+        <script src="global/oneTimes.js"></script>
+		<script src="global/myHeader.js"></script>
+		<script src="global/myNav.js"></script>
+    </head>
+    <body class="light-gray">
+		<my-header></my-header>
+        <div style='width: 100%'>
+            <main id="main" class="main">
+                <div id="title" class="w3-container liver lockable" style="transition: 0.4s; width: 0px; white-space: nowrap;">
+                    <span style="float: left"><h2>Coding Projects</h2></span>
+                    <span id="totop" style="float: right; margin-top: 10px; display: none">
+                        <a href="projects/#header">[to top &#11205]</a></span>
+                </div>
+                <div id="content" class="w3-container sienna" style="transition: 0.4s; width: 0px">
+                    <div class="w3-card-4 w3-container light-gray content-item">
+                        <h3>Professional Projects</h3>
+                        <hr style="border-top-color:black">
+                        <h4><a href="https://kwant-project.org/">KWANT</a></h4>
+                        <p>
+                            In the summer of 2019 I made contributions to the KWANT Python package
+                            project. Specifically I developed a 1D Self Consistent Quantum Poisson
+                            Problem Solver, which is outlined in detail <a href="projects/1d_readme.html">here</a>. It is not yet
+                            implemented in package, although it should be added in the next update.
+                        </p>
+                        <div style="text-align: center;">
+                            <a href="projects/out-1.png" title="Click to see full size"><image src="projects/out-1.png" style="max-width: 100%;"></image></a>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="w3-card-4 w3-container light-gray content-item">
+                        <h3><a href="https://github.com/baf57?tab=repositories">GitHub Projects</a></h3>
+                        <hr style="border-top-color:black">
+                        <h4><a href="https://github.com/baf57/Phys1321Proj/blob/master/Master.ipynb">
+                            Universal Electric Potential Field Solver</a></h4>
+                        <p>
+                            A Python program made using the interactive Jupyter environment. The
+                            program is a 2 dimensional electric potential field solver which allows
+                            for the approximation of an electric field given regions of charge. It
+                            was extended to also allow for simulations of point charges within the
+                            field. Extensive documentation is provided within the Jupyter notebook,
+                            as the project was done for a computational physics course. It is 
+                            important to note that the notebook will not compile correctly within 
+                            GitHub and must be run locally for full functionality.
+                        </p>
+                        <div style="text-align: center;">
+                            <video controls="" autoplay="" loop="" style="width: auto; height: auto; max-width: 100%;">
+                                <source type="video/mp4" src="projects/uepfssim.mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <hr style="border-top-color:black">
+                        <h4><a href="https://github.com/baf57/config-log">config-log</a></h4>
+                        <p>
+                            A simple shell script which generates a centralized log of changes
+                            made to any files edited using this script. The original design of 
+                            this was for use in tracking changes to Unix configuration files.
+                        </p>
+                        <hr style="border-top-color:black">
+                        <h4><a href="https://github.com/baf57/mass-rename">mass-rename</a></h4>
+                        <p>
+                            A simple shell script which allows for the batch renaming of files
+                            in a directory based on globing. Was done as both a coding exercise
+                            as well as for my own use. Similar to the package 
+                            <a href="https://manpages.debian.org/stretch/rename/rename.1.en.html">rename</a>,
+                            but without the direct use of Perl expressions and with simpler syntax.
+                        </p>
+                        <div style="text-align: center;">
+                            <a href="projects/output.gif" title="Click to see full size"><image src="projects/output.gif" style="max-width: 100%;"></image></a>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </main>
+			<my-nav page="projects"></my-nav>
+        </div>
+    </body>
+</html>
