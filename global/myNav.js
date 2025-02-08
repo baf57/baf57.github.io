@@ -44,7 +44,7 @@ class Nav extends HTMLElement{
                     </div>
                     <p style="white-space: nowrap;">
                         Brayden Freitas <br>
-                        11/2022
+                        2/2025
                         <a rel="license" href="//creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"></a>
                     </p>
                 </div>
