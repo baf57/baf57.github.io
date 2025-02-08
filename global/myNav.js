@@ -5,7 +5,7 @@ class Nav extends HTMLElement{
 
     connectedCallback(){
         let entries = ['.', 'resume', 'projects', 'publications', 'designs', 'wood'];
-        let fNames = ['Home', 'R&eacute;sum&eacute;', 'Coding Projects', 'Publications', 'Digital Designs',
+        let fNames = ['Home', 'Resume', 'Coding Projects', 'Publications', 'Digital Designs',
             'Wood-Working'];
         let icons = ['fa-home', 'fa-suitcase', 'fa-code', 'fa-university', 'fa-paint-brush', 
             'fa-tree'];
